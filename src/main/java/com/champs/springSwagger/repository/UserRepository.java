@@ -1,5 +1,6 @@
 package com.champs.springSwagger.repository;
 
+import com.champs.springSwagger.handler.BusinessException;
 import com.champs.springSwagger.model.User;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +10,9 @@ import java.util.List;
 @Repository
 public class UserRepository {
     public void save(User user){
+        if(user.getName() == null) {
+            throw new BusinessException("Name cannot be null");
+        }
         if(user.getId() ==null){
             System.out.println("Saving new user: " + user);
         } else {
